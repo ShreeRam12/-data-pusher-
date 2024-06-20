@@ -1,0 +1,21 @@
+PS C:\Users\Marie\OneDrive\Desktop\DataPusher\data-pusher>
+                                                           node src/app.js
+Server is running on port 3000
+Executing (default): SELECT 1+1 AS result
+Connection has been established successfully.
+Executing (default): DROP TABLE IF EXISTS `Destinations`;
+Executing (default): DROP TABLE IF EXISTS `Accounts`;
+Executing (default): PRAGMA foreign_keys = OFF
+Executing (default): DROP TABLE IF EXISTS `Accounts`;
+Executing (default): DROP TABLE IF EXISTS `Destinations`;
+Executing (default): PRAGMA foreign_keys = ON
+Executing (default): DROP TABLE IF EXISTS `Accounts`;
+Executing (default): CREATE TABLE IF NOT EXISTS `Accounts` (`accountId` UUID PRIMARY KEY, `email` VARCHAR(255) NOT NULL UNIQUE, `name` VARCHAR(255) NOT NULL, `appSecretToken` UUID, `website` VARCHAR(255), `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL);
+Executing (default): PRAGMA INDEX_LIST(`Accounts`)
+Executing (default): PRAGMA INDEX_INFO(`sqlite_autoindex_Accounts_1`)
+Executing (default): PRAGMA INDEX_INFO(`sqlite_autoindex_Accounts_2`)
+Executing (default): DROP TABLE IF EXISTS `Destinations`;
+Executing (default): CREATE TABLE IF NOT EXISTS `Destinations` (`destinationId` UUID PRIMARY KEY, `url` VARCHAR(255) NOT NULL, `method` VARCHAR(255) NOT NULL, `headers` JSON NOT NULL, `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, `accountId` UUID REFERENCES `Accounts` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE);
+Executing (default): PRAGMA INDEX_LIST(`Destinations`)
+Executing (default): PRAGMA INDEX_INFO(`sqlite_autoindex_Destinations_1`)
+Database synchronized.
